@@ -1,5 +1,5 @@
+# All files with .exe extension are to be ignored.
 *.exe
 
-Data Structures/*.exe
-
+# ignore .vscode directory. 
 .vscode
