@@ -1,2 +1,5 @@
-*.exe,
-Data Structures\*.exe,
+*.exe
+
+Data Structures/*.exe
+
+/.vscode
