@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX 10
 
 typedef struct stack
@@ -8,6 +9,7 @@ typedef struct stack
 } stack;
 
 // Functions on stack (Prototypes) --->
+void initialize(stack *s);
 void push(stack *s, int x);
 int pop(stack *s);
 int isEmpty(stack *s);
@@ -18,30 +20,87 @@ void display(stack *s);
 int main()
 {
     stack s;
-    s.top = -1;
+    int x, choice;
+    initialize(&s);
 
-    int emp = isEmpty(&s);
-    printf("\nIs Empty : %d", emp);
+    do
+    {
+        printf("\n\n***** MENU *****");
+        printf("\n 1) Push Operation   : ");
+        printf("\n 2) Pop Operation    : ");
+        printf("\n 3) Peek Operation   : ");
+        printf("\n 4) Display Stack    : ");
+        printf("\n 5) Exit Program     : ");
+        printf("\n_______________________");
+        printf("\n>>>Enter your choice : ");
+        scanf("%d", &choice);
 
-    push(&s, 10);
-    push(&s, 20);
-    push(&s, 30);
-    push(&s, 40);
-    push(&s, 50);
+        switch (choice)
+        {
+        case 1:
+            if (isFull(&s))
+                printf("\n>>> Stack Overflow !");
 
-    int ful = isFull(&s);
-    printf("\nIsFull : %d", ful);
+            else
+            {
+                printf(">>> Enter data : ");
+                scanf("%d", &x);
+                push(&s, x);
+            }
+            break;
 
-    display(&s);
+        case 2:
+            if (isEmpty(&s))
+                printf("\n>>> Stack Underflow !");
+            else
+            {
+                x = pop(&s);
+                printf("\n>>> %d was removed!", x);
+            }
+            break;
 
-    int x = pop(&s);
-    printf("Element %d was removed!\n", x);
-    int y = pop(&s);
-    printf("Element %d was removed!\n", y);
+        case 3:
+            if (isEmpty(&s))
+                printf("\n>>> Stack Underflow !");
+            else
+            {
+                printf(">>> Enter data : ");
+                scanf("%d", &x);
+                int res = peek(&s, x);
+                if (res == -1)
+                    printf("\n>>> Element not found!");
+
+                else
+                {
+                    printf("\n>>> Element found!");
+                    printf("\n>>> Position : %d", res);
+                }
+            }
+            break;
+
+        case 4:
+            display(&s);
+            break;
+
+        case 5:
+            exit(0);
+            break;
+
+        default:
+            printf("\nPlease enter a valid choice!");
+            break;
+        }
+    } while (choice != 5);
+
     return 0;
 }
 
 // Function Definitions --->
+void initialize(stack *s)
+{
+    s->top = -1;
+}
+
 void push(stack *s, int x)
 {
     s->top++;
