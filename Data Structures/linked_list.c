@@ -14,6 +14,7 @@ node *insert(node *head, int x, int position);
 node *pop(node *head);
 node *popLeft(node *head);
 node *rm(node *head, int position);
+node *remove_all(node *head);
 int findElement(node *head, int x);
 void display(node *head);
 
@@ -26,14 +27,16 @@ int main()
     do
     {
         printf("\n\n***** MENU *****");
-        printf("\n1) AppendRight Elements : ");
-        printf("\n2) AppendLeft Elements  : ");
-        printf("\n3) Insert Elements      : ");
-        printf("\n4) PopRight Operation   : ");
-        printf("\n5) PopLeft Operation    : ");
-        printf("\n6) Find Element         : ");
-        printf("\n7) Display Linked List  : ");
-        printf("\n8) Exit Program         : ");
+        printf("\n1)  AppendRight Elements : ");
+        printf("\n2)  AppendLeft Elements  : ");
+        printf("\n3)  Insert Elements      : ");
+        printf("\n4)  PopRight Operation   : ");
+        printf("\n5)  PopLeft Operation    : ");
+        printf("\n6)  Remove Elements : ");
+        printf("\n7)  Remove All Nodes : ");
+        printf("\n8)  Find Element         : ");
+        printf("\n9)  Display Linked List  : ");
+        printf("\n10) Exit Program         : ");
         printf("\n_____________________________");
         printf("\n~ Select your choice    : ");
         scanf("%d", &choice);
@@ -69,6 +72,17 @@ int main()
             break;
 
         case 6:
+            printf("\n>>>Enter pos : ");
+            scanf("%d", &position);
+            head = rm(head, position);
+            break;
+
+        case 7:
+            head = remove_all(head);
+            printf("\n>>>Removed All Nodes...");
+            break;
+
+        case 8:
             printf("\n>>>Enter data : ");
             scanf("%d", &x);
             int res = findElement(head, x);
@@ -78,18 +92,19 @@ int main()
                 printf("\n>>>Element found at %d!", res);
             break;
 
-        case 7:
+        case 9:
             printf("\n>>>Linked List -->\n");
             display(head);
+            break;
 
-        case 8:
+        case 10:
             exit(0);
             break;
 
         default:
-            break;
+            printf("\n>>>Please enter a valid option!");
         }
-    } while (choice != 8);
+    } while (choice != 10);
 
     return 0;
 }
@@ -147,12 +162,10 @@ node *insert(node *head, int x, int position)
     else
     {
         q = head;
-        for (int i = 1; i < position; i++)
-            if (q->next != NULL)
-                q = q->next;
-            else
-                printf("\n>>>Position too high!");
-        p->next = q->next->next;
+        for (int i = 0; i < position; i++)
+            q = q->next;
+
+        p->next = q->next;
         q->next = p;
     }
     return head;
@@ -188,9 +201,8 @@ node *rm(node *head, int position)
 {
     node *p, *q;
     p = q = head;
-
     int i = 0;
-    while (i <= position)
+    while (i < position)
     {
         q = q->next;
         i++;
@@ -229,4 +241,18 @@ void display(node *head)
         printf(" %d -> ", p->data);
         p = p->next;
     }
+}
+
+node *remove_all(node *head)
+{
+    node *p, *q;
+    p = q = head;
+    while (q != NULL)
+    {
+        q = q->next;
+        head = q;
+        free(p);
+        p = head;
+    }
+    return head;
 }
