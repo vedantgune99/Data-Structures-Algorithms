@@ -162,7 +162,7 @@ node *insert(node *head, int x, int position)
     else
     {
         q = head;
-        for (int i = 0; i < position; i++)
+        for (int i = 1; i < position; i++)
             q = q->next;
 
         p->next = q->next;
@@ -201,7 +201,7 @@ node *rm(node *head, int position)
 {
     node *p, *q;
     p = q = head;
-    int i = 0;
+    int i = 1;
     while (i < position)
     {
         q = q->next;
