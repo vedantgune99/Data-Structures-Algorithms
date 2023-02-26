@@ -7,6 +7,7 @@ typedef struct node
     struct node *next;
 } node;
 
+// Function Prototypes --->
 node *append(node *head, int x);
 node *appendLeft(node *head, int x);
 node *insert(node *head, int x, int position);
@@ -82,7 +83,6 @@ int main()
 
             else
             {
-
                 printf("\n>>> Enter pos : ");
                 scanf("%d", &position);
                 head = rm(head, position);
@@ -122,6 +122,7 @@ int main()
     return 0;
 }
 
+// Function Definitions --->
 node *append(node *head, int x)
 {
     node *p, *q;
