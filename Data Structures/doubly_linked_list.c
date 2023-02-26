@@ -17,6 +17,7 @@ node *rm(node *head, int position);
 node *remove_all(node *head);
 int findElement(node *head, int x);
 void display(node *head);
+void for_back_trav(node *head);
 
 int main()
 {
@@ -27,18 +28,19 @@ int main()
     do
     {
         printf("\n\n***** MENU *****");
-        printf("\n1)  AppendRight Elements : ");
-        printf("\n2)  AppendLeft Elements  : ");
-        printf("\n3)  Insert Elements      : ");
-        printf("\n4)  PopRight Operation   : ");
-        printf("\n5)  PopLeft Operation    : ");
-        printf("\n6)  Remove Elements : ");
-        printf("\n7)  Remove All Nodes : ");
-        printf("\n8)  Find Element         : ");
-        printf("\n9)  Display Linked List  : ");
-        printf("\n10) Exit Program         : ");
-        printf("\n_____________________________");
-        printf("\n~ Select your choice    : ");
+        printf("\n1)  AppendRight Elements        : ");
+        printf("\n2)  AppendLeft Elements         : ");
+        printf("\n3)  Insert Elements             : ");
+        printf("\n4)  PopRight Operation          : ");
+        printf("\n5)  PopLeft Operation           : ");
+        printf("\n6)  Remove Elements             : ");
+        printf("\n7)  Remove All Nodes            : ");
+        printf("\n8)  Find Element                : ");
+        printf("\n9)  Display Linked List         : ");
+        printf("\n10) Forward-Backward Traversal  : ");
+        printf("\n11) Exit Program                : ");
+        printf("\n__________________________________");
+        printf("\n~ Select your choice            : ");
         scanf("%d", &choice);
 
         switch (choice)
@@ -98,13 +100,18 @@ int main()
             break;
 
         case 10:
+            printf("\n>>>Both Way Traversal -->\n");
+            for_back_trav(head);
+            break;
+
+        case 11:
             exit(0);
             break;
 
         default:
             printf("\n>>>Please enter a valid option!");
         }
-    } while (choice != 10);
+    } while (choice != 11);
 
     return 0;
 }
@@ -151,6 +158,7 @@ node *appendLeft(node *head, int x)
 node *insert(node *head, int x, int position)
 {
     node *p, *q;
+    int i = 1;
     p = (node *)malloc(sizeof(node));
     p->data = x;
     p->next = p->prev = NULL;
@@ -160,8 +168,11 @@ node *insert(node *head, int x, int position)
     else
     {
         q = head;
-        for (int i = 0; i < position; i++)
+        while (i <= position)
+        {
             q = q->next;
+            i++;
+        }
 
         p->next = q->next;
         q->next->prev = p;
@@ -202,8 +213,8 @@ node *rm(node *head, int position)
 {
     node *p, *q;
     p = q = head;
-    int i = 0;
-    while (i < position - 1)
+    int i = 1;
+    while (i <= position)
     {
         q = q->next;
         i++;
@@ -257,4 +268,24 @@ node *remove_all(node *head)
         p = head;
     }
     return head;
+}
+
+void for_back_trav(node *head)
+{
+    node *p, *q;
+    p = q = head;
+    printf("\nForward Traversal -----> ");
+    while (q != NULL)
+    {
+        printf(" %d ->", q->data);
+        p = q;
+        q = q->next;
+    }
+
+    printf("\nBackward Traversal -----> ");
+    while (p != NULL)
+    {
+        printf(" %d <-", p->data);
+        p = p->prev;
+    }
 }
