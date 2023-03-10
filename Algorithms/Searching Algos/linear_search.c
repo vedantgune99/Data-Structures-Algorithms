@@ -2,7 +2,7 @@
 #define MAX 5
 
 // Function Prototype --->
-int linearSearch(int arr[], int data, int len);
+int linearSearch(int arr[], int data);
 
 int main()
 {
@@ -17,7 +17,7 @@ int main()
     printf("\n>>>Enter data you want to find : ");
     scanf("%d", &x);
 
-    int index = linearSearch(arr, x, MAX);
+    int index = linearSearch(arr, x);
 
     if (index >= 0)
         printf("\nElement found at %d!", index);
@@ -28,10 +28,10 @@ int main()
 }
 
 // Linear Search on Array --->
-int linearSearch(int arr[], int data, int len)
+int linearSearch(int arr[], int data)
 {
     int index = 0;
-    while (index++ < len)
+    while (index++ < MAX)
     {
         if (arr[index] == data)
             return index;
