@@ -1,26 +1,37 @@
 #include <stdio.h>
-#define MAX 5
 
+// Function Prototype --->
 void selection_sort(int arr[], int len);
 int find_min_index(int arr[], int start, int end);
+void display(int arr[], int len);
 
 int main()
 {
-    int num[MAX] = {5, 4, 3, 2, 1};
-    // int min = find_min(num, 1, 10);
+    // Input of maxsize
+    int max;
+    printf("\n>>>Enter number of elements : ");
+    scanf("%d", &max);
 
-    printf("\nBefore Sorting....");
-    for (int i = 0; i < MAX; i++)
-        printf("%d, ", num[i]);
+    // Taking input of array
+    int num[max];
+    int i = 0;
+    while (i < max)
+    {
+        printf("Enter element %d : ", i + 1);
+        scanf("%d", &num[i++]);
+    }
 
-    selection_sort(num, MAX);
-    printf("\nAfter Sorting....");
-    for (int i = 0; i < MAX; i++)
-        printf("%d, ", num[i]);
+    printf("\nBefore Sorting ---> \n");
+    display(num, max);
+
+    selection_sort(num, max);
+    printf("\nAfter Sorting ---> \n");
+    display(num, max);
 
     return 0;
 }
 
+// Function finds & returns the index of minimum element --->
 int find_min_index(int arr[], int start, int end)
 {
     int min = arr[start];
@@ -36,6 +47,7 @@ int find_min_index(int arr[], int start, int end)
     }
 }
 
+// Sorts the dataset using selection sort algo --->
 void selection_sort(int arr[], int len)
 {
     for (int i = 0; i < len; i++)
@@ -48,4 +60,11 @@ void selection_sort(int arr[], int len)
             arr[min] = temp;
         }
     }
+}
+
+// display the dataset --->
+void display(int arr[], int len)
+{
+    for (int i = 0; i < len; i++)
+        printf(" %d ", arr[i]);
 }
