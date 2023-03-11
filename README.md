@@ -1,2 +1,0 @@
-<h2>Data Structures & Algorithms</h2>
-    In Data Structures and Algorithms, while learning alongside, I am learning and implementing each structure and algorithm that I can with C Programming language for better understanding and getting the actual functionality and behind the scenes in all these data structures algorithms.
