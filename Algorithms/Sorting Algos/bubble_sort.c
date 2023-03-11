@@ -1,37 +1,41 @@
 #include <stdio.h>
-#define MAX 5
 
 // Function Prototype --->
-void bubble_sort(int arr[]);
-void display(int arr[]);
+void bubble_sort(int arr[], int len);
+void display(int arr[], int len);
 
 int main()
 {
-    int arr[MAX];
+    int max;
+    printf("\nEnter elements of array :  \n");
+    scanf("%d", &max);
+
+    int arr[max];
     int i = 0;
-    printf("\nEnter elements of array ---> \n");
-    while (i < MAX)
+    while (i < max)
     {
+        printf("\nEnter element %d : ", i + 1);
         scanf("%d", &arr[i]);
         i++;
     }
-    bubble_sort(arr);
-    display(arr);
+    bubble_sort(arr, max);
+    display(arr, max);
     return 0;
 }
 
-void display(int arr[])
+// Function Body --->
+void display(int arr[], int len)
 {
     int i = 0;
-    while (i < MAX)
+    while (i < len)
         printf(" %d ", arr[i++]);
 }
 
-void bubble_sort(int arr[])
+void bubble_sort(int arr[], int len)
 {
-    for (int i = 0; i <= MAX; i++)
+    for (int i = 0; i <= len; i++)
     {
-        for (int j = 0; j <= (MAX - i - 1); j++)
+        for (int j = 0; j <= (len - i - 1); j++)
         {
             if (arr[j] >= arr[j + 1])
             {
